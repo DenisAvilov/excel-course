@@ -15,6 +15,19 @@ Git
 	Development
 		2.0.2
 		1 -----------------
-
-
+-------------------------------------------------------------------------
+1 npm install webpack webpack-cli --save-dev
+2 npm install --save-dev html-webpack-plugin
+3 npm install --save-dev mini-css-extract-plugin
+4 npm install --save-dev css-loader
+5 npm install sass-loader sass --save-dev
+6 npm install @babel/preset-env --save-dev 
+7 npm install --save-dev babel-loader @babel/core
+8 npm i -D cross-env
+9 npm install --save-dev clean-webpack-plugin
+10 npm install webpack-dev-server --save-dev
+11 npm install --save @babel/polyfill
+12 npm install eslint@4.x babel-eslint@8 --save-dev
+13 npm install --save-dev eslint-config-google
+14 npm install copy-webpack-plugin --save-dev
 
