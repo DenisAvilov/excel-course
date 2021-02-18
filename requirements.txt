@@ -31,3 +31,12 @@ Git
 13 npm install --save-dev eslint-config-google
 14 npm install copy-webpack-plugin --save-dev
 
+15 npm install normalize.css
+--------------------
+git branch --all
+git checkout -b "css-layout"
+
+--------------------
+contenteditable  (https://developer.mozilla.org/ru/docs/Web/HTML/Global_attributes/contenteditable )
+spellcheck (запретить проверку правописания)
+white-space - (https://developer.mozilla.org/ru/docs/Web/CSS/white-space)
