@@ -1,0 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans+Extra+Condensed:wght@200;400;600&display=swap');
+@import '~normalize.css';
+
+@import "./var";
+@import "./header.scss";
+@import './toolbar.scss';
+@import './formula.scss';
+@import './table.scss';
+@import './dashboard.scss';
+
+
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: $font-family-body;
+    font-size: 12px;
+}
+
+.excel {
+    position: relative;
+    color: #888;
+    height: 100%;
+    max-width: 100%;
+    font-size: .8rem;
+}
