@@ -17,7 +17,8 @@
        "arrow-parens":"off",
        "comma-dangle":"off",
        "require-jsdoc":"off",
-       "no-undef":"off"
+       "no-undef":"off",
+       "operator-linebreak":"off"
     },
     "extends": ["eslint:recommended", "google"]
 } 
