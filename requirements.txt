@@ -33,6 +33,8 @@ Git
 
 15 npm install normalize.css
 --------------------
+git push -u origin css-layout
+git checkout main
 git branch --all
 git checkout -b "css-layout"
 
@@ -40,3 +42,47 @@ git checkout -b "css-layout"
 contenteditable  (https://developer.mozilla.org/ru/docs/Web/HTML/Global_attributes/contenteditable )
 spellcheck (запретить проверку правописания)
 white-space - (https://developer.mozilla.org/ru/docs/Web/CSS/white-space)
+
+--------------------
+
+ src
+	|assests
+	|components
+			|excel
+					|Excel.js
+	|core
+		|DomListener.js
+		|ExcelComponent.js
+
+1 DomListener.js
+2 ExcelComponent.js 
+	great method toHTML() -- отрисовка шаблонов 
+3 Создаем новую директорию
+  components
+
+4 statika  (
+	1 устанавлием плагин @babel/plugin-proposal-class-properties
+	2 подключаем плагин в webpack.js -> module -> rules -> js -> loader -> options
+	  plugins: ['@babel/plugin-proposal-class-properties']
+)
+5 dom|
+     |dom.js
+
+6 Работа с Dom
+  создаем свой метод  html()
+  котором будут  сеттер и гетерр и вернуть инстанс (chein pattern in javascript -> return this)
+  пример использования $('div').html('<h1>Test</h1').clear()
+  если мы не передаем параметров то это гетер и если передаем то это сетер
+ 
+ 7 initDOMListener (Должен быть вызван после отрисовки HTML)
+   инилициировать функцию, использовать емтод on() по аналогии с методом addEventListener(listener, fun) 
+	
+   removeDOMListener
+
+
+
+8 add file
+  core|
+  	  | untils.js
+	  |	// создать функцию капиталайз
+
