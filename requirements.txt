@@ -86,3 +86,18 @@ white-space - (https://developer.mozilla.org/ru/docs/Web/CSS/white-space)
   	  | untils.js
 	  |	// создать функцию капиталайз
 
+-------СВОЙСТВА----------
+
+let $class = event.target.parentNode.className
+let $class = event.target.currentTarget.className
+let $class = event.target.offsetParent.className
+-------METHODS JS--------
+$el.closest([`data-type="name"`])  /*вернуть родительский элемент
+el.getBoundingClientRect()  /* нативный метод позволяет получить координаты мыши
+-------LISTENERS JS------
+
+document.onmousemove ( передвижение мыши )
+
+-------EVENTS JS--------
+
+event.target.dataset /*получаем дата отрибуты data-resze="")

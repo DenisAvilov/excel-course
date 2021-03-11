@@ -5,14 +5,18 @@ const CODES = {
   z: 122
 }
 const addLiteral = (index) => {
-  // из ЮНИ КОДА в Обычный Алфавит
   return String.fromCharCode( CODES.A + index )
 }
 
 const createRow = (col, index) => {
+  const dataRow = index ? `data-type="resizer"` : ''
+  const resize = index ? `<div class="resize-row" data-resize="row"></div>` : ''
   return `
-    <div class="row">
-        <div class="row-info">${index ? index : ''}</div> 
+    <div class="row" ${dataRow}>
+        <div class="row-info">
+        ${index ? index : ''}
+        ${resize}
+        </div> 
         <div class="row-data"> 
         ${col}
         </div>
@@ -20,17 +24,20 @@ const createRow = (col, index) => {
 `
 }
 
-const createColums = (col) => {
+const createColums = (col, index) => {
   return `
-        <div class="column">
+        <div class="column" data-type="resizer" data-col="${index}"> 
         ${col}
+        <div class="resize-col" data-resize="col"></div>
         </div>
         `
 }
 
-const createCell = () => {
+const createCell = (_, index) => {
   return `
-        <div class="cell " contenteditable="true"></div>    
+        <div class="cell" contenteditable="true" data-col="${index}">
+        </div>  
+        
   `
 }
 
@@ -41,7 +48,7 @@ export const createTable = (countRow = 15) => {
   const componentColum = new Array(countColumns)
       .fill('')
       .map( (_, index) => addLiteral(index))
-      .map( (el) => createColums(el))
+      .map( (el, index) => createColums(el, index))
       .join('')
 
   rows.push(createRow(componentColum, null))
@@ -49,7 +56,7 @@ export const createTable = (countRow = 15) => {
   for (let i = 0; i < countRow; i++) {
     const cells = new Array(countColumns)
         .fill('')
-        .map(comp => createCell(comp))
+        .map((comp, index) => createCell(comp, index))
         .join('')
     rows.push(createRow(cells, i + 1))
   }

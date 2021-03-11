@@ -9,7 +9,7 @@ export class Excel {
 
 
   getRoot() {
-    //  alert('video 0307, 0308txt, 03_10, 03_11')
+    //  alert('o4_04',)
     const root = $.createElementAndClassName('div', 'excel')
 
     this.$components = this.$components.map(Component => {
