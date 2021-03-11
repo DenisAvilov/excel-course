@@ -1,7 +1,7 @@
 import {ExcelComponent} from '@/core/ExcelComponent'
 
 export class Toolbar extends ExcelComponent {
-     // коневой класс для данного блока
+
   static className = 'excel__toolbar'
    constructor($root) {
        super($root, {
@@ -10,8 +10,7 @@ export class Toolbar extends ExcelComponent {
        })
    } 
   toHTML() {
-    return ` 
-               
+    return `
     <div class="button"> 
         <span class="material-icons">
             format_align_left
@@ -42,9 +41,7 @@ export class Toolbar extends ExcelComponent {
             format_underlined
         </span>
     </div>
-    
-`
-  }
+`}
 
   onClick (event) {
     console.log(event.target)

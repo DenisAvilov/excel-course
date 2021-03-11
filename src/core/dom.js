@@ -21,6 +21,25 @@ class Dom {
     return this
   }
 
+  get data() {
+    return this.$element.dataset
+  }
+
+  css(styles) {
+    Object.keys(styles)
+        .forEach(e => this.$element.style[e] = styles[e])
+  }
+
+
+  closest(element) {
+    return $(this.$element.closest(element))
+  }
+
+  getCoords() {
+    return this.$element.getBoundingClientRect()
+  }
+
+
   on(eventType, func) {
     this.$element.addEventListener(eventType, func)
     // https://developer.mozilla.org/en-US/docs/Web/Events

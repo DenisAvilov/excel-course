@@ -8,19 +8,22 @@
     top: $header-height + $toolbar-height + $formula-height;
     overflow-x: auto;
     padding-bottom: 2px;
-
+    overflow-y: hidden;
     .row {
         display: flex;
         flex-direction: row;
         min-width: 20px;
+        min-height: $row-height;
         height: $row-height;            
     }   
     .row-info {
+        position: relative;
         display: flex;
         justify-content: center;
         align-items: center;
         min-width: $info-cell-width;
         height: 100%;
+        min-height: $row-height;
         border: 1px solid $border-color;
         background: #f8f9fa;
         border-top: none;
@@ -28,8 +31,9 @@
 
     .row-data {
         display: flex;
-       
+        min-height: $row-height;
         .column {
+            position: relative;
             width: $cell-width;
             min-width : 40px ;
             display: flex;
@@ -40,7 +44,6 @@
             border-left: 0;
             border-top: 0;
             height: 100%;
-
         } 
     }
 
@@ -56,11 +59,42 @@
         color: #000;
         white-space: nowrap;
         outline: none;
-
+        position: relative;
         &.selected {
         border: none;
-        outline: 2px solid #3c74ff;
+        outline: 2px solid $resize;
         z-index: 2;
-    }
-    }    
+        }
+       
+    } 
+
+  .resize-row, .resize-col{
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    background: $resize;
+    opacity: 0;  
+    transition: opacity .2s ease;
+    z-index: 100;
+    &:hover {
+         opacity: 1 !important;        
+      }
+    
+  }
+  .resize-row{
+    left: 0;
+    height: 3px;
+    z-index: 1000;
+    &:hover {       
+        cursor: n-resize;
+      }
+  }
+  .resize-col{
+      top: 0;      
+      width: 3px;
+      &:hover {      
+        cursor: ew-resize;
+      }
+  }
+  
 }
