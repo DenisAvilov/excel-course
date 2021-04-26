@@ -1,15 +1,14 @@
 import {ExcelComponent} from '@/core/ExcelComponent'
-
+import {$} from './../../core/dom'
 export class Formula extends ExcelComponent {
 
-  constructor($root){
+  constructor($root, options){
     super($root, {
       name : 'Formula',
-      listener: ['input', 'click']
+      listener: ['input','keydown'],
+      ...options
+     
     })
-   
-
-    
   }
 
   // коневой класс для данного блока
@@ -18,18 +17,31 @@ export class Formula extends ExcelComponent {
   toHTML() {
     return `
                 <div class="info">fx</div>
-                <div class="input" contenteditable="true" spellcheck="false"></div>
+                <div id="formula" class="input" contenteditable="true" spellcheck="false"></div>
                 
         `
   }
 
-  onInput(event){    
-    console.log(' onInput  listener inpur ', event.target.textContent.trim())  
+  onInput(event){
+    this.$fire('formula:input', $(event.target).text() )
+ }
+
+  init() {
+    super.init()
+    const $input = this.$root.querySelector('#formula')
+    
+    this.$on('table:change', newText => $input.text(newText))
+    this.$on('table:input',  text => $input.text(text))
+
   }
 
-  onClick(event){  
-    console.log(' onClick  listener ', event)  
+  onKeydown(event){
+    const keys = ['Tab','Enter']
+  if( keys.includes(event.key)){
+    const $target = $(event.target)
+    event.preventDefault() 
+    this.$fire('formula:enter',)
   }
-
-
+  
+}
 }

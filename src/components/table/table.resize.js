@@ -1,15 +1,13 @@
 import {$} from '../../core/dom'
-export const tableResize = (event) => {
+export const tableResize = ($root, event) => {
   const $resize = $(event.target)
   const type = $resize.data.resize
 
   const $parant = $resize.closest('[data-type="resizer"]')
-  const parantCoords = $parant.getCoords()
-  const colActive = document.querySelectorAll(`[data-col="${$parant.data.col}"]`)
+  const parantCoords = $parant.getCoords()  
   let value
   const resizeActive = type === 'col' ? 'bottom' : 'right'
   $resize.css({[resizeActive]: '-3000px', opacity: 1})
-
   document.onmousemove = e => {
     if (type == 'col') {
       const pageX = e.pageX
@@ -27,9 +25,10 @@ export const tableResize = (event) => {
   }
   document.onmouseup = () => {
     if ( type == 'col') {
-      colActive.forEach(e => {
-        e.style.width = value + 'px'
-      })
+      $root.querySelectorAll(`[data-col="${$parant.data.col}"]`)
+          .forEach(e => {
+            e.style.width = value + 'px'
+          })
       document.onmousemove = null
       $resize.css({opacity: 0, bottom: 0})
       document.onMouseup = null

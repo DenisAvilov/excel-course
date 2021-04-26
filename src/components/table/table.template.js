@@ -33,9 +33,11 @@ const createColums = (col, index) => {
         `
 }
 
-const createCell = (_, index) => {
+const createCell = (row, index) => {
   return `
-        <div class="cell" contenteditable="true" data-col="${index}">
+        <div class="cell" contenteditable="true" data-col="${index}"
+        data-rowcell="${row}:${index}"
+        >
         </div>  
         
   `
@@ -53,12 +55,12 @@ export const createTable = (countRow = 15) => {
 
   rows.push(createRow(componentColum, null))
 
-  for (let i = 0; i < countRow; i++) {
+  for (let row = 0; row < countRow; row++) {
     const cells = new Array(countColumns)
         .fill('')
-        .map((comp, index) => createCell(comp, index))
+        .map( (_, index) => createCell(row, index))
         .join('')
-    rows.push(createRow(cells, i + 1))
+    rows.push(createRow(cells, row + 1))
   }
 
   return rows.join('')
