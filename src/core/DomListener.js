@@ -1,6 +1,6 @@
 // В этот класс будим добовлять какие то изолированные
 // события для конкретного элемента которые наследуются от этого класса
-import {stringGluing} from '@core/untils'
+import {stringGluing} from './untils'
 
 export class DomListener {
 // $root корневой элемент на который будим вешать различные слушатели

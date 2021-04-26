@@ -62,13 +62,12 @@
         position: relative;
         &.selected {
         border: none;
-        outline: 2px solid $resize;
+        outline: 1px solid $resize;
         z-index: 2;
         }
-       
     } 
 
-  .resize-row, .resize-col{
+.resize-row, .resize-col{
     position: absolute;
     right: 0;
     bottom: 0;
@@ -77,9 +76,8 @@
     transition: opacity .2s ease;
     z-index: 100;
     &:hover {
-         opacity: 1 !important;        
-      }
-    
+        opacity: 1 !important;        
+    }    
   }
   .resize-row{
     left: 0;
