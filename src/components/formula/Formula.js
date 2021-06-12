@@ -24,14 +24,18 @@ export class Formula extends ExcelComponent {
 
   onInput(event){
     this.$fire('formula:input', $(event.target).text() )
+    // this.$subscribeStore(store =>   $formula.text(store.curentCellText.text))
  }
 
   init() {
     super.init()
-    const $input = this.$root.querySelector('#formula')
+    const $formula = this.$root.querySelector('#formula')
     
-    this.$on('table:change', newText => $input.text(newText))
-    this.$on('table:input',  text => $input.text(text))
+    this.$on('table:change', newText =>{  $formula.text(newText)    })
+    this.$on('table:input',  text => $formula.text(text))
+    this.$on('table:onMouseDown',  text => $formula.text(text))
+
+    this.$subscribeStore(store => $formula.text(store.curentCellText.text))
 
   }
 
