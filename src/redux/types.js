@@ -1,0 +1,3 @@
+export const TABLE_RESIZE = 'EXCEL/TABLE-RESIZE'
+export const CHANGE_TEXT = 'EXCEL/CHANGE_TEXT'
+

@@ -14,20 +14,13 @@ export class Emitter {
   }
 
   // уведомляем сслушателя если он есть
-  fire(сhangesEvent, ...args) {
-    if (!Array.isArray(this.observers[сhangesEvent])) {
+  fire(event, ...args) {
+    if (!Array.isArray(this.observers[event])) {
       return false
     }
-    this.observers[сhangesEvent].forEach(listener => {
+    this.observers[event].forEach(listener => {
       listener(...args)
     });
     return true
   }
 }
-
-// const emitter = new Emitter()
-// const unSub = emitter.subscrube('Denis', data => console.log(data))
-// emitter.fire('Denis', 36)
-// emitter.fire('Denis', 37)
-// unSub()
-// emitter.fire('Denis', 38)
