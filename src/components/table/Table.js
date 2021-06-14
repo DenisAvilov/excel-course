@@ -6,6 +6,8 @@ import {shutResize, shutRowcell, matrix, matrixCell} from './table.function'
 import {tableResize} from './table.resize' 
 import  * as actions from '../../redux/actions'
 export class Table extends ExcelComponent {
+  static className = 'excel__table'
+
   constructor($root, options){
     super($root, {
       name: 'Table',
@@ -14,12 +16,8 @@ export class Table extends ExcelComponent {
     })  
   }
 
-  static className = 'excel__table'
-
   toHTML() {
-      return `
-      ${createTable(33, this.getStore())}
-        `
+      return createTable(33, this.getStore())
   }
 
   prepare() {
@@ -29,23 +27,22 @@ export class Table extends ExcelComponent {
 
   init() {
     super.init()
-    this.tableSelect(this.$root.querySelector(`[data-rowcell="${'0:0'}"]`))
+   
+    this.tableSelect(this.$root.querySelector(`[data-rowcell="0:0"]`))
+   
     this.$on('formula:input', text => {
       this.selected.startGroup.text(text)
-      console.log(text)
       this.upDateText(text)
       })
-    this.$on('formula:enter', () => {
-      this.selected.startGroup.focus()
-    }  )  
-    // this.$subscribeStore( table => 
-    //   console.log('TableState', table))
 
+    this.$on('formula:done', () => {
+      this.selected.startGroup.focus()
+    }  )     
   } 
  
-  tableSelect (cell) {
-    this.selected.select(cell)  
-    this.$fire('table:change', cell.text())
+  tableSelect ($cell) {    
+    this.selected.select($cell)
+    this.$emit('table:select', $cell)
   }
 
  async resizeTable(event) {
@@ -63,49 +60,52 @@ export class Table extends ExcelComponent {
       this.resizeTable(event)
     } else if (shutRowcell(event)) {
       const $target = $(event.target) 
-      this.$fire('table:onMouseDown', $(event.target).text())
+      this.$emit('table:onMouseDown', $(event.target).text())
     if ( event.ctrlKey ) {
-   const $cells = matrix($target, this.selected.startGroup)
+      const $cells = matrix($target, this.selected.startGroup)
       .map( id => this.$root.querySelector(`[data-rowcell="${id}"]`))
       this.selected.selectGroup($cells)
       }    
-    else { this.selected.select($target)
-      // this.upDateText( $(event.target).text())
+    else { 
+      this.selected.select($target)
     }
     }
   }
 
   onKeydown(event) {
+    const keys = [
+      'ArrowRight',
+      'ArrowDown',
+      'ArrowLeft',
+      'ArrowUp',
+      'Tab',
+      'Enter'
+  ]
+
     const items = this.$root.querySelector(`.row-data:last-child`)
     const maxColumns = items.$element.childElementCount - 1   
     const maxRows = this.$root.querySelector(`.row:last-child`).$element.innerText 
     const rows = +maxRows - 1
-    const keys = ['ArrowRight','ArrowDown','ArrowLeft','ArrowUp','Tab','Enter']
-    if(keys.includes(event.key) && !event.shiftKey ){
-    event.preventDefault()
-    const col = this.selected.startGroup.id(true).col
-    const row = this.selected.startGroup.id(true).row
 
-    const $cell  = this.$root.querySelector(matrixCell(event.key, row, col, maxColumns, rows))      
-    this.tableSelect($cell)
+    const {key} = event
+
+    if(keys.includes(key) && !event.shiftKey ){
+      event.preventDefault()
+      const col = this.selected.startGroup.id(true).col
+      const row = this.selected.startGroup.id(true).row
+      this.tableSelect(this.$root.querySelector(matrixCell(key, row, col, maxColumns, rows)) )
     }
     
   }
 
-  onInput(event) {     
-    this.$fire('table:input', $(event.target).text())
-    this.upDateText( $(event.target).text())
-       
-  }
-
-  upDateText(text) {   
+   upDateText(value) {   
     this.$distpath(actions.changeText({
     id: this.selected.startGroup.id(),
-    text: text,
-   })) 
+    value
+    })) 
+  }
+
+  onInput(event) { 
+    this.upDateText($(event.target).text())
+  }
 }
-
-}
-
- 
-

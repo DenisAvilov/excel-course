@@ -19,3 +19,15 @@ export function storage(key, data = null) {
   }
   return localStorage.setItem(key, JSON.stringify(data))
 }
+
+export function isEqual(a, b) {
+  // иначе понадобится функция dipEquale() где будим бежатся ректусивно
+  // по объекту и сравнивать его с другими ключами объекта
+  if (typeof a === 'object' && typeof b === 'object' ) {
+    // то объекты нужно ставнивать по другому
+    // работает только если в объектах неиспользуются
+    // сложные структурные данные: new Data(), .map, inc
+    return JSON.stringify(a) === JSON.stringify(b)
+  }
+  return a === b // true or false
+}
