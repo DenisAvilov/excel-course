@@ -6,7 +6,7 @@ const defaultState = {
   curentCellText: '',
 }
 
-export const initial = storage('tableResize')
-    ? storage('tableResize')
+export const initial = storage('excel-state')
+    ? storage('excel-state')
     : defaultState
 

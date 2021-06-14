@@ -12,7 +12,7 @@ import './scss/index.scss'
 const store = createStore(rootReduser, initial);
 
 // eslint-disable-next-line no-console
-store.subscribelStore(state => storage('tableResize', state) )
+store.subscribelStore(state => storage('excel-state', state) )
 
 window.store = store
 

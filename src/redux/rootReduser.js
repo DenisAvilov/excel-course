@@ -2,7 +2,7 @@ import {TABLE_RESIZE, CHANGE_TEXT} from './types'
 export const rootReduser = (state, action) => { 
   let prevState 
   let flag  
-  console.log(action.data)
+  // console.log(action.data)
   switch (action.type) {   
     case TABLE_RESIZE:
       flag = action.data.type === 'col' ? 'colState' : 'rowState'
@@ -13,8 +13,8 @@ export const rootReduser = (state, action) => {
       }
     case CHANGE_TEXT:
       prevState = state['cellState'] || {}      
-      prevState[action.data.id] = action.data.text
-      return {...state, curentCellText: action.data.text, cellState: prevState}
+      prevState[action.data.id] = action.data.value
+      return {...state, curentCellText: action.data.value, cellState: prevState}
       default: return state
   }
 }

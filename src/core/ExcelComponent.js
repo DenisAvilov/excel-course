@@ -4,11 +4,12 @@ export class ExcelComponent extends DomListener {
   constructor($root, options = {}) {
     super($root, options.listener)
     this.name = options.name || ''
-    this.prepare()
     this.emitter = options.emitter
+    this.subscribe = options.subscribe || []
     this.store = options.store
-    this.unSubStore = null
-    this.unSubscrube = []
+    this.unSubscribe = []
+
+    this.prepare()
   }
   // Возвращяем шаблон компонета
   toHTML() {
@@ -17,12 +18,12 @@ export class ExcelComponent extends DomListener {
   // подписываемся на событие event
   $on(event, fn) {
     const unSub = this.emitter.subscrube(event, fn)
-    this.unSubscrube.push(unSub)
+    this.unSubscribe.push(unSub)
   }
 
   // шаблон програмирования фасад
   // Уведомляем слушателей про события event
-  $fire(event, ...args) {
+  $emit(event, ...args) {
     this.emitter.fire(event, ...args)
   }
   // Полуяем состояние всего преложения
@@ -33,9 +34,12 @@ export class ExcelComponent extends DomListener {
   $distpath(action) {
     this.store.dispath(action)
   }
-  // единожді подписіваемся на состояние
-  $subscribeStore(fn) {
-    this.unSubStore = this.store.subscribelStore(fn)
+
+  // сюда приходят только изменения по полям на которые мы подписались
+  storeChanged() {}
+
+  isWatching(key) {
+    return this.subscribe.includes(key)
   }
 
   // Настраиваем наш компонент до Инит
@@ -51,8 +55,7 @@ export class ExcelComponent extends DomListener {
   // Удаляем компонент
   destroy() {
     this.remuveDomListener()
-    this.unSubscrube.forEach( component => component())
-    this.unSubStore.unSubscrube()
+    this.unSubscriber.forEach( component => component())
   }
 }
 

@@ -18,7 +18,10 @@ export const createStore = ( rootReduser, initialState = {} ) => {
       listener.forEach(listener => listener(state))
     },
     getStore() {
-      return state
+      // глубоко скланируем объект для избежания мутаций и,
+      // так как в методе isEqual() в ./untils.js используем упрощенный вариант по сравлению объектов
+      // при спользовании сложных структурных данных это работать не будит
+      return JSON.parse(JSON.stringify(state)) 
     } 
   }
   
